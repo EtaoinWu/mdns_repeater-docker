@@ -388,7 +388,7 @@ static int parse_opts(int argc, char *argv[]) {
 	int help = 0;
 	struct subnet *ss;
 	char *msg;
-	while ((c = getopt(argc, argv, "hfp:b:w:")) != -1) {
+	while ((c = getopt(argc, argv, "hfvp:b:w:")) != -1) {
 		switch (c) {
 			case 'h': help = 1; break;
 			case 'f': foreground = 1; break;
