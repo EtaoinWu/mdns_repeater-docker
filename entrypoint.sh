@@ -7,7 +7,7 @@
 
 if [[ ${USE_MDNS_REPEATER} -eq 1 ]]; then
   if [[ ${DOCKER_NETWORK_NAME} -eq 'bridge' ]]; then
-    exec mdns-repeater ${OPTIONS} "${EXTERNAL_INTERFACE}" "docker0"
+    exec mdns-repeater -f ${OPTIONS} "${EXTERNAL_INTERFACE}" "docker0"
   else
     # This searches the list of docker networks for the network name in order to get the ID, then (below) uses that ID
     # to infer the docker interface name.
@@ -16,7 +16,7 @@ if [[ ${USE_MDNS_REPEATER} -eq 1 ]]; then
     # Below is for future use in case I want to try to auto-detect the external interface
     #NON_VIRTUAL_INTERFACES=($(ip addr | grep "state UP" -A2 | awk '/inet/{print $(NF)}' | grep -P '^(?:(?!veth).)*$' | tr '\n' ' '))
 
-    exec mdns-repeater ${OPTIONS} "${EXTERNAL_INTERFACE}" "br-${DOCKER_INTERFACE}"
+    exec mdns-repeater -f ${OPTIONS} "${EXTERNAL_INTERFACE}" "br-${DOCKER_INTERFACE}"
   fi
 else
   # If the local user has disabled the app, then just sleep forever
