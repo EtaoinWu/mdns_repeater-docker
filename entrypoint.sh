@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ ${USE_MDNS_REPEATER} -eq 1 ]]; then
-  if [[ ${DOCKER_NETWORK_NAME} -eq 'bridge' ]]; then
+if [ "${USE_MDNS_REPEATER}" -eq 1 ]; then
+  if [ "${DOCKER_NETWORK_NAME}" = "bridge" ]; then
     echo "Starting repeater with the default bridge network..."
     
     exec mdns-repeater -f ${OPTIONS} "${EXTERNAL_INTERFACE}" "docker0"
