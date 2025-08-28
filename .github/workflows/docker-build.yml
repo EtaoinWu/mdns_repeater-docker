@@ -3,12 +3,15 @@ name: 'Build & Push to Docker Hub'
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
   buildx:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -36,5 +39,5 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: |
-            ghcr.io/${{ env.OWNER }}/${{ env.REPO }}:latest
+            ghcr.io/${{ env.OWNER }}/${{ env.REPO }}:dev
             ghcr.io/${{ env.OWNER }}/${{ env.REPO }}:${{ env.DATE_TAG }}
