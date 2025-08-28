@@ -32,6 +32,13 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v3
         
+      - name: Calculate date tag and lower case owner and repo name
+        run: |
+          DATE_TAG="build-$(date +'%Y-%m-%d')"
+          echo "DATE_TAG=$DATE_TAG" >> $GITHUB_ENV
+          echo "OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "REPO=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      
       - name: Build
         uses: docker/build-push-action@v6
         with:
